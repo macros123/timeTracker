@@ -1,24 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [inputStart, changeStart] = useState('00:00')
+  const [inputLast, changeLast] = useState('23:00')
+
+  function handleChangeStart(e: React.ChangeEvent<HTMLInputElement>) {
+    changeStart(e.target.value);
+  }
+  function handleChangeLast(e: React.ChangeEvent<HTMLInputElement>) {
+    changeLast(e.target.value);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      Задать интервал таблицы
+      <input type="time" value={inputStart} onChange={handleChangeStart} />-
+      <input type="time" value={inputLast} onChange={handleChangeLast} />
     </div>
   );
 }
