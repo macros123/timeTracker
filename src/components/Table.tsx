@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Table.css';
 import Cell from "./Cell";
 
@@ -19,19 +19,38 @@ for (let i = 0; i < hours; i++){
 function Table({start, end}: TableProps) {
     const [status, changeStatus] = useState(mas);
 
-    function handleChangeStatus(param: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-        console.log(param)
+    function handleChangeStatus(hour: number, day: number) {
+        const tmp = status
+        tmp[hour][day] = !tmp[hour][day]
+        changeStatus(tmp);
     }
 
-    const [hoursStart, minsStart] = start.split(':').map(e => Number(e))
-    const [hoursEnd, minsEnd] = end.split(':').map(e => Number(e))
-    let cells = [];
-    for(let i = hoursStart; i < hoursEnd; i++) {
-        cells.push(<Cell hour={i.toString()} day={'some'} key={i} change={handleChangeStatus}/>);
+    const [hoursStart, startMin] = start.split(':').map(e => Number(e))
+    const [hoursEnd, endMin] = end.split(':').map(e => Number(e))
+    const rows: any[][] = [];
+    for(let i = 0; i < days; i++) {
+        rows[i] = [];
+        for (let j = hoursStart; j <= hoursEnd; j++) {
+            if(j !== hoursStart && j !== hoursEnd) {
+                rows[i][j] = <Cell hour={j} day={i} key={i + j.toString()}
+                                   change={handleChangeStatus} isChecked={status[j][i]} />;
+            } else {
+                if(j === hoursStart) {
+                    rows[i][j] = <Cell hour={j} day={i} key={i + j.toString()}
+                                       change={handleChangeStatus} isChecked={status[j][i]}
+                                       startMin={startMin} />;
+                } else {
+                    rows[i][j] = <Cell hour={j} day={i} key={i + j.toString()}
+                                       change={handleChangeStatus} isChecked={status[j][i]}
+                                       endMin={endMin} />;
+                }
+            }
+        }
     }
+
     return (
         <div className='table' >
-            {cells}
+            {rows.map(el => <div className='row'>{el}</div>)}
         </div>
     );
 }
