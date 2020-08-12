@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {MouseEventHandler} from 'react';
+import './Cell.css';
 
-function App() {
+interface CellProps {
+    hour: string,
+    day: string,
+    change: changeStatus
+}
+
+interface changeStatus {
+    (params: React.MouseEvent<HTMLDivElement, MouseEvent> ): void
+}
+
+function Cell({hour, day, change}: CellProps) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="Cell" onClick={event => change(event)}>
     </div>
   );
 }
 
-export default App;
+export default Cell;

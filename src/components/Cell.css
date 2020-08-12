@@ -1,0 +1,10 @@
+.Cell {
+  background-color: #DFE4EF;
+  width: 33px;
+  height: 30px;
+  margin: 1px;
+}
+
+.Cell:hover {
+  background-color: #0066FF;
+}
