@@ -1,6 +1,5 @@
 .Cell {
   background-color: #DFE4EF;
-  width: 33px;
   height: 30px;
   margin: 1px;
 }
@@ -11,16 +10,4 @@
 
 .checked {
   background-color: #0066FF;
-}
-.width1 {
-  width: 1%;
-}
-.width2 {
-  width: 2%;
-}
-.width3 {
-  width: 3%;
-}
-.width4 {
-  width: 4%;
 }

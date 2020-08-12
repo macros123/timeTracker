@@ -14,6 +14,7 @@ function App() {
   }
   return (
     <div className="App">
+      <h2>График работы предприятия</h2>
       Задать интервал таблицы
       <input type="time" value={inputStart} onChange={handleChangeStart} />-
       <input type="time" value={inputEnd} onChange={handleChangeEnd} />

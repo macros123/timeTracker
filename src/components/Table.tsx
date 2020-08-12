@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './Table.css';
 import Cell from "./Cell";
+import TimeLine from './TimeLine';
 
 type TableProps = {
     start: string,
@@ -49,7 +50,8 @@ function Table({start, end}: TableProps) {
     }
 
     return (
-        <div className='table' >
+        <div className='table' >            
+            <TimeLine start={start} end={end} />
             {rows.map(el => <div className='row'>{el}</div>)}
         </div>
     );

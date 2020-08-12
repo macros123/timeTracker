@@ -2,6 +2,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 764px;
+    margin: 0 auto;
+    height: 250px;
 }
 .row {
     display: flex;
