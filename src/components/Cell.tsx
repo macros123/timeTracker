@@ -15,12 +15,16 @@ interface changeStatus {
 }
 
 function Cell({ hour, day, change, isChecked, startMin, endMin }: CellProps) {
-    const [check, setCheck] = useState(isChecked);
+    const [check, setCheck] = useState(false);
 
     function handleClick() {
         change(hour, day);
         setCheck(!check);
     }
+
+    React.useEffect(() => {
+        setCheck(isChecked);
+    }, [isChecked])
 
     let width = '33px';
     if(startMin)
