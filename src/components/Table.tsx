@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import './Table.css';
 import Cell from "./Cell";
 import TimeLine from './TimeLine';
 
+
 type TableProps = {
     start: string,
-    end: string
+    end: string,
+    isFilling?: boolean
 }
 
 const hours = 24, days = 7;
@@ -17,7 +19,7 @@ for (let i = 0; i < hours; i++){
     }
 }
 
-function Table({start, end}: TableProps) {
+function Table({start, end, isFilling}: TableProps) {
     const [status, changeStatus] = useState(mas);
 
     function handleChangeStatus(hour: number, day: number) {
@@ -25,6 +27,14 @@ function Table({start, end}: TableProps) {
         tmp[hour][day] = !tmp[hour][day]
         changeStatus(tmp);
     }
+    useEffect(() => {
+        for (let i = 0; i < hours; i++){
+            mas[i] = [];
+            for (let j = 0; j < days; j++){
+                mas[i][j] = isFilling || false;
+            }
+        }
+    });
 
     const [hoursStart, startMin] = start.split(':').map(e => Number(e))
     const [hoursEnd, endMin] = end.split(':').map(e => Number(e))
@@ -59,12 +69,15 @@ function Table({start, end}: TableProps) {
             }
         }
     }
-
     return (
-        <div className='table' >
-            <TimeLine start={start} end={end} />
-            {rows.map(el => <div className='row'>{el}</div>)}
-        </div>
+        <>
+            <div className='flex-container'>
+                <div className='table' >
+                    <TimeLine start={start} end={end} />
+                    {rows.map(el => <div className='row'>{el}</div>)}
+                </div>
+            </div>
+        </>
     );
 }
 

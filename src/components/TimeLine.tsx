@@ -33,13 +33,13 @@ function TimeLine({start, end}: TableProps) {
         return param <= hoursEnd;
     }
     for (let j = hoursStart; call(j, isStartBigger); j+=2) {
-        if(j !== hoursStart && j !== hoursEnd ) {
+        if(j !== hoursStart && j !== hoursEnd  && j+1 !== hoursEnd ) {
             rows.push({hour: j});
         } else {
             if(j === hoursStart) {
                 rows.push({hour: j, minutes: startMin});
             } else {
-                rows.push({hour: j, minutes: endMin, isOneHour: j+2 === hoursEnd})
+                rows.push({hour: j, minutes: endMin, isOneHour: j === hoursEnd})
             }
         }
         if(isStartBigger && j === 23) {

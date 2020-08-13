@@ -1,5 +1,8 @@
 .Time {
-    background-color: cornflowerblue;
     margin: 0 1px;
     height: 31px;
+    display: flex;
+}
+.minute {
+    font-size: 10px;
 }
