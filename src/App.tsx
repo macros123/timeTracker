@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import Table from "./components/Table";
+import DaysList from "./components/DaysList";
 
 function App() {
   const [inputStart, changeStart] = useState('00:00')
@@ -18,7 +19,10 @@ function App() {
       Задать интервал таблицы
       <input type="time" value={inputStart} onChange={handleChangeStart} />-
       <input type="time" value={inputEnd} onChange={handleChangeEnd} />
-      <Table start={inputStart} end={inputEnd} />
+      <div className='container'>
+          <DaysList />
+          <Table start={inputStart} end={inputEnd} />
+      </div>
     </div>
   );
 }

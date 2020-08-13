@@ -1,0 +1,8 @@
+.DaysList {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 215px;
+    margin-top: 34px;
+    margin-right: 21px;
+}

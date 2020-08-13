@@ -23,7 +23,7 @@ function Cell({ hour, day, change, isChecked, startMin, endMin }: CellProps) {
     }
 
     let width = '33px';
-    if(startMin) 
+    if(startMin)
         width =  `${Math.floor(startMin / 1.82)}px`
     if(endMin)
         width =  `${Math.floor(endMin / 1.82)}px`
@@ -32,6 +32,7 @@ function Cell({ hour, day, change, isChecked, startMin, endMin }: CellProps) {
     }
     return (
         <div className={check ? 'checked Cell' : 'Cell'} onClick={event => handleClick()} style={styles}>
+            {hour}
         </div>
     );
 }

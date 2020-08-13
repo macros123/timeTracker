@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './Table.css';
 import Cell from "./Cell";
 import TimeLine from './TimeLine';
@@ -29,28 +29,39 @@ function Table({start, end}: TableProps) {
     const [hoursStart, startMin] = start.split(':').map(e => Number(e))
     const [hoursEnd, endMin] = end.split(':').map(e => Number(e))
     const rows: any[][] = [];
+    const isStartBigger = hoursStart > hoursEnd;
+    const call = (param: number, isBigger: boolean): boolean => {
+        if(isBigger)
+            return true;
+        return param <= hoursEnd;
+    }
     for(let i = 0; i < days; i++) {
-        rows[i] = [];
-        for (let j = hoursStart; j <= hoursEnd; j++) {
+        rows.push([]);
+        let tmpBigger = isStartBigger;
+        for (let j = hoursStart; call(j, tmpBigger); j++) {
             if(j !== hoursStart && j !== hoursEnd) {
-                rows[i][j] = <Cell hour={j} day={i} key={i + j.toString()}
-                                   change={handleChangeStatus} isChecked={status[j][i]} />;
+                rows[i].push(<Cell hour={j} day={i} key={i + j.toString()}
+                                   change={handleChangeStatus} isChecked={status[j][i]} />);
             } else {
                 if(j === hoursStart) {
-                    rows[i][j] = <Cell hour={j} day={i} key={i + j.toString()}
+                    rows[i].push(<Cell hour={j} day={i} key={i + j.toString()}
                                        change={handleChangeStatus} isChecked={status[j][i]}
-                                       startMin={startMin} />;
+                                       startMin={startMin} />);
                 } else {
-                    rows[i][j] = <Cell hour={j} day={i} key={i + j.toString()}
+                    rows[i].push(<Cell hour={j} day={i} key={i + j.toString()}
                                        change={handleChangeStatus} isChecked={status[j][i]}
-                                       endMin={endMin} />;
+                                       endMin={endMin} />);
                 }
+            }
+            if(tmpBigger && j === 23) {
+                tmpBigger = false;
+                j = -1;
             }
         }
     }
 
     return (
-        <div className='table' >            
+        <div className='table' >
             <TimeLine start={start} end={end} />
             {rows.map(el => <div className='row'>{el}</div>)}
         </div>

@@ -3,21 +3,22 @@ import './HourElement.css';
 
 interface HourElementProps {
     hour: number,
-    mins?: number
+    minutes?: number,
+    isOneHour?: boolean
 }
 
-function HourElement({ hour, mins }: HourElementProps) {
+function HourElement({ hour, minutes, isOneHour }: HourElementProps) {
 
-
-    let width = '68px';
-    if(mins) 
-        width =  `${Math.floor(mins / 1.82)+33}px`;
+    const basis = isOneHour ? 34 : 68;
+    let width = `${basis}px`;
+    // if(minutes)
+    //     width =  `${Math.floor(minutes / 1.82)+basis}px`;
     const styles = {
             width: width
         }
     return (
         <div className='Time' style={styles}>
-            {hour}-{mins}
+            {hour}-{minutes}
         </div>
     );
 }
