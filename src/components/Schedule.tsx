@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-import './Schedule.css';
+import './Schedule.less';
 import Table from "./Schedule/Table";
 import DaysList from "./Schedule/DaysList";
+
+/**
+  Schedule component
+  #example <Schedule />
+*/
 
 const argeeImg = (
   <svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">
