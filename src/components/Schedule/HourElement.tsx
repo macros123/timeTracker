@@ -1,5 +1,5 @@
 import React from 'react';
-import './HourElement.css';
+import './HourElement.less';
 
 interface HourElementProps {
     hour: number,
