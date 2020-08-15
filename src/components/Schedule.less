@@ -45,8 +45,26 @@
   padding: 15px;
   }
   .my-button:hover {
+    animation: blink-shadow 0.3s linear normal ;
+  }
+
+  
+@keyframes blink-shadow {
+  0% {    
+    background-color: #DFE4EF; 
+  }
+
+  50% {
     background-color: #cce7ff;
     box-shadow: 0 0 5px 2px blue;
+  }
+  
+  100% {
+    background-color: #cce7ff;
+  }
+}
+  .my-button:hover {
+    background-color: #cce7ff;
   }
   .button-clear {
     margin: 0 62px 0 10px;

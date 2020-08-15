@@ -5,9 +5,21 @@
 }
 
 .Cell:hover {
+  animation-duration: 0.5s;
+  animation-name: back-color;
   background-color: #0066FF;
 }
 
 .checked {
   background-color: #0066FF;
+}
+
+@keyframes back-color {
+  from {    
+    background-color: #DFE4EF; 
+  }
+
+  to {
+    background-color: #0066FF;
+  }
 }
