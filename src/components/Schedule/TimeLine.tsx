@@ -1,5 +1,5 @@
 import React from 'react';
-import './TimeLine.css';
+import './TimeLine.less';
 import HourElement from './HourElement';
 
 type TableProps = {
@@ -12,27 +12,21 @@ type ArrayOfTimes = {
     minutes?: number,
     isOneHour?: boolean
 }
-const hours = 24, days = 7;
-let mas: boolean[][] = [];
-for (let i = 0; i < hours; i++){
-    mas[i] = [];
-    for (let j = 0; j < days; j++){
-        mas[i][j] = false;
-    }
-}
 
-function TimeLine({start, end}: TableProps) {
-
+function TimeLine({start, end}: TableProps) {    
     const [hoursStart, startMin] = start.split(':').map(e => Number(e))
     const [hoursEnd, endMin] = end.split(':').map(e => Number(e))
+
     const rows: ArrayOfTimes[] = [];
     let isStartBigger = hoursStart > hoursEnd;
-    const call = (param: number, isBigger: boolean): boolean => {
+
+    const callbackCondition = (param: number, isBigger: boolean): boolean => {
         if(isBigger)
             return true;
         return param <= hoursEnd;
     }
-    for (let j = hoursStart; call(j, isStartBigger); j+=2) {
+    
+    for (let j = hoursStart; callbackCondition(j, isStartBigger); j+=2) {
         if(j !== hoursStart && j !== hoursEnd  && j+1 !== hoursEnd ) {
             rows.push({hour: j});
         } else {

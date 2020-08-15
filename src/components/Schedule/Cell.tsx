@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import './Cell.css';
+import React, {useState} from 'react';
+import './Cell.less';
 
 interface CellProps {
     hour: number,

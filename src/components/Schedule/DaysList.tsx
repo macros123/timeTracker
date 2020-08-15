@@ -1,5 +1,5 @@
 import React from 'react';
-import './DaysList.css';
+import './DaysList.less';
 
 const weekDays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
