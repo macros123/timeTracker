@@ -1,0 +1,64 @@
+.App {
+    text-align: center;
+    width: 764px;
+    height: 525px;
+    margin: 15px auto;
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 4px rgba(0, 15, 38, 0.1);
+    border-radius: 6px;
+    padding-top: 50px;
+  }
+  body {
+    background-color: #E5E5E5;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .header {
+    margin-bottom: 35px;
+    text-align: left;
+    padding-left: 100px;
+    font-size: 15px;
+  }
+  h2 {
+    font-size: 22px;
+  }
+  input {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+  
+  .my-button {
+    height: 30px;
+    border: 1px solid #D3D8DF;
+  box-sizing: border-box;
+  border-radius: 50px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  padding: 15px;
+  }
+  .my-button:hover {
+    background-color: #cce7ff;
+    box-shadow: 0 0 5px 2px blue;
+  }
+  .button-clear {
+    margin: 0 62px 0 10px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 21px;
+  }
+  svg {
+    
+    padding-right: 10px;
+  }
+  

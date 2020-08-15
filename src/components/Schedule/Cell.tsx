@@ -19,7 +19,7 @@ function Cell({ hour, day, change, isChecked, startMin, endMin }: CellProps) {
 
     function handleClick() {
         change(hour, day);
-        setCheck(!check);
+        setCheck(isChecked);
     }
 
     React.useEffect(() => {
@@ -36,7 +36,7 @@ function Cell({ hour, day, change, isChecked, startMin, endMin }: CellProps) {
     }
     return (
         <div className={check ? 'checked Cell' : 'Cell'} onClick={event => handleClick()} style={styles}>
-            {hour}
+            
         </div>
     );
 }
