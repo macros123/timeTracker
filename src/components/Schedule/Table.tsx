@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './Table.less';
 import Cell from "./Cell";
 import TimeLine from './TimeLine';
+import {callbackCondition} from '../types/helpers'
 
 type TableProps = {
     start: string,
@@ -37,15 +38,11 @@ function Table({start, end, isFilling}: TableProps) {
         const [hoursStart, startMin] = start.split(':').map(e => Number(e))
         const [hoursEnd, endMin] = end.split(':').map(e => Number(e))
         const isStartBigger = hoursStart > hoursEnd;
-        const call = (param: number, isBigger: boolean): boolean => {
-            if(isBigger)
-                return true;
-            return param <= hoursEnd;
-        }
+
         for(let i = 0; i < days; i++) {
             cells.push([]);
             let tmpBigger = isStartBigger;
-            for (let j = hoursStart; call(j, tmpBigger); j++) {
+            for (let j = hoursStart; callbackCondition(j, tmpBigger, hoursEnd); j++) {
                 if(j !== hoursStart && j !== hoursEnd) {
                     cells[i].push(<Cell hour={j} day={i} key={i + j.toString()}
                                        change={handleChangeStatus} isChecked={status[j][i]} />);

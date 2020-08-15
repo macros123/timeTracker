@@ -1,8 +1,9 @@
 import React from 'react';
 import './TimeLine.less';
 import HourElement from './HourElement';
+import {callbackCondition} from '../types/helpers'
 
-type TableProps = {
+type TimeProps = {
     start: string,
     end: string
 }
@@ -13,20 +14,15 @@ type ArrayOfTimes = {
     isOneHour?: boolean
 }
 
-function TimeLine({start, end}: TableProps) {    
+function TimeLine({start, end}: TimeProps) {    
     const [hoursStart, startMin] = start.split(':').map(e => Number(e))
     const [hoursEnd, endMin] = end.split(':').map(e => Number(e))
 
     const rows: ArrayOfTimes[] = [];
     let isStartBigger = hoursStart > hoursEnd;
 
-    const callbackCondition = (param: number, isBigger: boolean): boolean => {
-        if(isBigger)
-            return true;
-        return param <= hoursEnd;
-    }
     
-    for (let j = hoursStart; callbackCondition(j, isStartBigger); j+=2) {
+    for (let j = hoursStart; callbackCondition(j, isStartBigger, hoursEnd); j+=2) {
         if(j !== hoursStart && j !== hoursEnd  && j+1 !== hoursEnd ) {
             rows.push({hour: j});
         } else {
