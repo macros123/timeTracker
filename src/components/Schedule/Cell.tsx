@@ -29,8 +29,11 @@ function Cell({ hour, day, change, isChecked, startMin, endMin }: CellProps) {
     let width = '33px';
     if(startMin)
         width =  `${Math.floor(startMin / 1.82)}px`
-    if(endMin)
+    if(endMin){
         width =  `${Math.floor(endMin / 1.82)}px`
+        console.log(endMin);
+        
+    }
     const styles = {
         width: width
     }

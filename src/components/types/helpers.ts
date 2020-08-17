@@ -1,7 +1,7 @@
-const callbackCondition = (param: number, isBigger: boolean, hoursEnd: number): boolean => {
+const callbackCondition = (param: number, isBigger: boolean, hoursEnd: number, endMin: number): boolean => {
     if(isBigger)
         return true;
-    return param < hoursEnd;
+    return endMin === 0 ? param <= (hoursEnd) : param <= hoursEnd;
 }
 
 export {callbackCondition}

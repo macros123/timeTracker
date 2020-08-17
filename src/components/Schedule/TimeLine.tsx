@@ -20,9 +20,10 @@ function TimeLine({start, end}: TimeProps) {
 
     const rows: ArrayOfTimes[] = [];
     let isStartBigger = hoursStart > hoursEnd;
-
+    console.log(hoursEnd);
     
-    for (let j = hoursStart; callbackCondition(j, isStartBigger, hoursEnd); j+=2) {
+    
+    for (let j = hoursStart; callbackCondition(j, isStartBigger, hoursEnd, endMin); j+=2) {
         if(j !== hoursStart && j !== hoursEnd  && j+1 !== hoursEnd ) {
             rows.push({hour: j});
         } else {

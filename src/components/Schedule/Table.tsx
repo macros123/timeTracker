@@ -47,7 +47,7 @@ function Table({start, end, isFilling}: TableProps) {
         for(let i = 0; i < days; i++) {
             cells.push([]);
             let tmpBigger = isStartBigger;
-            for (let j = hoursStart; callbackCondition(j, tmpBigger, hoursEnd); j++) {
+            for (let j = hoursStart; callbackCondition(j, tmpBigger, hoursEnd, endMin); j++) {
                 if(j !== hoursStart && j !== hoursEnd) {
                     cells[i].push(<Cell hour={j} day={i} key={i + j.toString()}
                                        change={handleChangeStatus} isChecked={stat[j][i]} />);

@@ -20,7 +20,7 @@ function HourElement({ hour, minutes, isOneHour }: HourElementProps) {
     return (
         <div className='Time' style={styles}>
             <div className='hour'>{hour.toString().padStart(2, '0')}</div>
-            <div className='minute'>{(minutes && minutes.toString().padStart(2, '0')) || '00'}</div>
+            <div className='minute'>{(minutes && isOneHour && minutes.toString().padStart(2, '0')) || '00'}</div>
         </div>
     );
 }
