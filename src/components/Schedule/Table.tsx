@@ -10,8 +10,7 @@ type TableProps = {
     isFilling?: boolean
 }
 
-//state contains in status
-//for rendering used rerender 
+//initial state contains from status
 
 const hours = 24, days = 7;
 let status: boolean[][] = [];
@@ -23,14 +22,20 @@ for (let i = 0; i < hours; i++){
 }
 
 function Table({start, end, isFilling}: TableProps) {
-    const [rerender, emitRender] = useState(false);
+    const [stat, changeStatus] = useState(status)
     
     let cells: any[][] = [];
     refreshTable();
 
     function handleChangeStatus(hour: number, day: number) {
-        status[hour][day] = !status[hour][day]
-        emitRender(!rerender);
+        changeStatus(oldStat => {
+            const tmp = oldStat.map((el, i) => {
+                return el.map((el1, j) => {
+                    return (i === hour && j === day) ? !el1 : el1
+                })
+            });
+            return tmp;            
+        })
     }
 
     function refreshTable() {
@@ -45,15 +50,15 @@ function Table({start, end, isFilling}: TableProps) {
             for (let j = hoursStart; callbackCondition(j, tmpBigger, hoursEnd); j++) {
                 if(j !== hoursStart && j !== hoursEnd) {
                     cells[i].push(<Cell hour={j} day={i} key={i + j.toString()}
-                                       change={handleChangeStatus} isChecked={status[j][i]} />);
+                                       change={handleChangeStatus} isChecked={stat[j][i]} />);
                 } else {
                     if(j === hoursStart) {
                         cells[i].push(<Cell hour={j} day={i} key={i + j.toString()}
-                                           change={handleChangeStatus} isChecked={status[j][i]}
+                                           change={handleChangeStatus} isChecked={stat[j][i]}
                                            startMin={startMin} />);
                     } else {
                         cells[i].push(<Cell hour={j} day={i} key={i + j.toString()}
-                                           change={handleChangeStatus} isChecked={status[j][i]}
+                                           change={handleChangeStatus} isChecked={stat[j][i]}
                                            endMin={endMin} />);
                     }
                 }
@@ -66,14 +71,12 @@ function Table({start, end, isFilling}: TableProps) {
     }
     
     React.useEffect(() => {
-        for (let i = 0; i < hours; i++){
-            status[i] = [];
-            for (let j = 0; j < days; j++){
-                status[i][j] = !!isFilling;
-            }
-        };
-        refreshTable(); 
-        emitRender(!rerender);
+        changeStatus(oldStat => {
+            const tmp = oldStat.map(el => {
+                return el.map(() => !!isFilling)
+            });
+            return tmp;            
+        });
     }, [isFilling]);
     
     return (
@@ -81,7 +84,7 @@ function Table({start, end, isFilling}: TableProps) {
             <div className='flex-container'>
                 <div className='table' >
                     <TimeLine start={start} end={end} />
-                    {cells.map(el => <div className={`row ${rerender ? 'rerender': 'rerender1'}`}>{el}</div>)}
+                    {cells.map(el => <div className={`row`}>{el}</div>)}
                 </div>
             </div>
         </>
